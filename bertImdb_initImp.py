@@ -8,6 +8,7 @@
 
 #pip install transformers
 #pip install tensorflow
+#wget https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased.tar.gz
 import tensorflow as tf
 import pandas as pd
 
@@ -16,7 +17,9 @@ from transformers import InputExample, InputFeatures
 
 
 #def first_model():
-model = TFBertForSequenceClassification.from_pretrained("bert-base-uncased")
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = TFBertForSequenceClassification.from_pretrained("bert-base-uncased", force_download=True).save_pretrained("bert-cache")
+tokenizer = TFBertForSequenceClassification.from_pretrained('.')
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
 model.summary()
