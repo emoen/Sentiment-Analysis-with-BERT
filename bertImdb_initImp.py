@@ -15,11 +15,14 @@ import pandas as pd
 from transformers import BertTokenizer, TFBertForSequenceClassification
 from transformers import InputExample, InputFeatures
 
+# The shutil module offers a number of high-level 
+# operations on files and collections of files.
+import os
+import shutil
+
 
 #def first_model():
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-model = TFBertForSequenceClassification.from_pretrained("bert-base-uncased", force_download=True).save_pretrained("bert-cache")
-tokenizer = TFBertForSequenceClassification.from_pretrained('.')
+model = TFBertForSequenceClassification.from_pretrained("bert-base-uncased")
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
 model.summary()
@@ -34,10 +37,6 @@ dataset = tf.keras.utils.get_file(fname="aclImdb_v1.tar.gz",
                                   cache_subdir='')
                                   
                                   
-# The shutil module offers a number of high-level 
-# operations on files and collections of files.
-import os
-import shutil
 
 #def remove_unsup():
 # Create main directory path ("/aclImdb")
@@ -62,8 +61,8 @@ test = tf.keras.preprocessing.text_dataset_from_directory(
 
 #def train_df():
 for i in train.take(1):
-  train_feat = i[0].numpy()
-  train_lab = i[1].numpy()
+    train_feat = i[0].numpy()
+    train_lab = i[1].numpy()
 
 train = pd.DataFrame([train_feat, train_lab]).T
 train.columns = ['DATA_COLUMN', 'LABEL_COLUMN']
@@ -72,8 +71,8 @@ train.head()
     
 #def test_df():
 for j in test.take(1):
-  test_feat = j[0].numpy()
-  test_lab = j[1].numpy()
+    test_feat = j[0].numpy()
+    test_lab = j[1].numpy()
 
 test = pd.DataFrame([test_feat, test_lab]).T
 test.columns = ['DATA_COLUMN', 'LABEL_COLUMN']
